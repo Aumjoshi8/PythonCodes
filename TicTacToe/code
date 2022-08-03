@@ -1,0 +1,45 @@
+def sum(a,b,c):
+    return a+b+c
+
+def printboard(xState,Zstate):
+    print(f"{'x' if xState[0] else ('o' if Zstate[0] else 0)} | {'x' if xState[1] else ('o' if Zstate[1] else 1)} | {'x' if xState[2] else ('o' if Zstate[2] else 2)}")
+    print(f"--|---|--")
+    print(f"{'x' if xState[3] else ('o' if Zstate[3] else 3)} | {'x' if xState[4] else ('o' if Zstate[4] else 4)} | {'x' if xState[5] else ('o' if Zstate[5] else 5)}")
+    print(f"--|---|--")
+    print(f"{'x' if xState[6] else ('o' if Zstate[6] else 6)} | {'x' if xState[7] else ('o' if Zstate[7] else 7)} | {'x' if xState[8] else ('o' if Zstate[8] else 8)}")
+def checkwin(x,z):
+    wins=[[0,1,2],[0,3,6],[0,4,8],[3,4,5],[6,7,8],[2,5,8],[2,4,6]]
+    for win in wins:
+        if sum(x[win[0]], x[win[1]], x[win[2]])==3:
+            print("X winss!")
+            return 1
+        if sum(z[win[0]], z[win[1]], z[win[2]])==3:
+            print("O winss!")
+            return 0
+    return -1
+
+if __name__=="__main__":
+    xstate=[0,0,0,0,0,0,0,0,0]
+    zstate=[0,0,0,0,0,0,0,0,0]
+    turn=1 #1 for x and zero for o
+    print("Welcome to Our Game:")
+    while(True):
+        printboard(xstate,zstate)
+        if turn==1:
+            print("x's chancee:")
+            value=int(input("Please enter a value:"))
+            xstate[value]=1
+            turn = turn - 1
+
+        else:
+            print("o's chancee:")
+            value = int(input("Please enter a value:"))
+            zstate[value] = 1
+            turn = turn + 1
+
+        cwin=checkwin(xstate,zstate)
+        if (cwin!=-1):
+            printboard(xstate,zstate)
+            break
+
+
